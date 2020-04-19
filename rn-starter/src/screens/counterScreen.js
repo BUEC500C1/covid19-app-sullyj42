@@ -7,33 +7,36 @@ const reducer = (state, action) => {
     // -- countvalue: integer
     // action: How should we change our state object
     // -- + 1, -1
+    // console.log(action.type)
+    // console.log(action.amount)
     switch (action.type) {
-        case "increase":
-            return { ...state, countvalue: state.countvalue + 1 };
-        case "decrease":
-            return { ...state, countvalue: state.countvalue - 1 };
+        case "Increase":
+            // console.log('Trying to increase')
+            return { ...state, countValue: state.countValue + action.amount };
+        case "Decrease":
+            return { ...state, countValue: state.countValue - action.amount };
         default:
             return state;
     }
 };
 const CounterScreen = () => {
-    const [counter, setCounter] = useState(0);
+    const [state, dispatch] = useReducer(reducer, { countValue:0 });
     return (
         <View>
         <Button 
             title="Increase"
             onPress={() => {
-                setCounter(counter + 1);
+                dispatch({ type: "Increase", amount: 1 });
             }}
         />
         <Button 
             title="Decrease"
             onPress={() => {
-                setCounter(counter - 1);
+                dispatch({ type: "Decrease", amount: 1 });
             }}
         />
         <Text></Text>
-        <Text style={styles.textStyle}>Current Count: {counter}</Text>
+        <Text style={styles.headline}>Current Count: {state.countValue}</Text>
         </View>
     );
 }
@@ -42,7 +45,16 @@ const styles = StyleSheet.create({
     textStyle: {
         marginVertical: 5,
         fontSize: 10
-    }
+    }, 
+    headline: {
+        textAlign: 'center', // <-- the magic
+        // fontWeight: 'bold',
+        fontSize: 12,
+        marginTop: 5,
+        //width: 200,
+        backgroundColor: 'white',
+        textAlign: 'center'
+  }
 });
 
 export default CounterScreen;
