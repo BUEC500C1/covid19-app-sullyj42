@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 17908,
+  "expoServerNgrokUrl": "https://95-tdt.anonymous.food.exp.direct",
+  "packagerNgrokUrl": "https://packager.95-tdt.anonymous.food.exp.direct",
+  "ngrokPid": 17919,
+  "webpackServerPort": null
+}
