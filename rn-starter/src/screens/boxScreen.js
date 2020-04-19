@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         alignItems: 'flex-start', // Always added to parent, default stretch
         flexDirection: 'row', // Horizontal vs. vertical
-        height: 1,
+        height: 100,
         //alignItems: 'center'
     },
     textOneStyle: {
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         borderColor: 'red',
         margin: 1,
         textAlign: 'center',
-        flex: 4
+        flex: 4,
+        alignSelf: 'center'
     },
     textTwoStyle: {
         borderWidth: 2,
