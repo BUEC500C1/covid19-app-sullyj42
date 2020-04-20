@@ -20,3 +20,22 @@ Screens:
 -- -- May be useful as an intermediate before overlaying more advanced features onto Map
 -- Data: More in-depth screen to interface with Covid data available
 -- -- Not yet implimented (beginning to explore this in the next step, in seperate repo)
+
+---
+Update: April 20, 2020
+
+COVID API will need some wrapping to be useful
+
+Should probably associate countries with current region of interest from map
+
+Then iterate over country and date to get data for that country
+
+If we want data from a range of dates, need to sum the values for display
+
+- This will require us to create a new .json file to associate countries with...
+- 1. Their physical location (if inside the map)
+- 2. Some sort of ID (Country code?)
+- 3. Population will be useful for per-capita estimates
+- 3. a. Ignore time varying population for now
+- 3. b. Future development could add this feature
+

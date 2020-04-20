@@ -50,10 +50,11 @@ const MapScreen = () => {
        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
        style={styles.map}
        region={{
-         latitude: 37.78825,
-         longitude: -122.4324,
-         latitudeDelta: 0.015,
-         longitudeDelta: 0.0121,
+         latitude: 42,
+         longitude: -70,
+         latitudeDelta: 50, // Pretty good swath to see a few countries
+         longitudeDelta: 50,
+         mapType:'roadmap' // Covid data appears political (defined by country)
        }}
      >
      </MapView>
