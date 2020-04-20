@@ -1,14 +1,42 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { MonoText } from '../components/StyledText';
 
-export default function HomeScreen() {
+const MyButton = ({ onPress, buttonText, buttonStyle, textStyle }) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={buttonStyle}>
+      <Text style={textStyle}>{buttonText}</Text>
+    </TouchableOpacity>
+  );
+};
+
+export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
+        <TouchableOpacity onPress={() => 
+              navigation.navigate('Map')}
+            style={styles.button}
+          >
+          <Text style={styles.buttonText}>View Map</Text>
+       </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => 
+              navigation.navigate('MapSettings')}
+            style={styles.button}
+          >
+          <Text style={styles.buttonText}>Map Settings</Text>
+       </TouchableOpacity>
+      <TouchableOpacity onPress={() => 
+              navigation.navigate('DataSettings')}
+            style={styles.button}
+          >
+          <Text style={styles.buttonText}>Select Data</Text>
+       </TouchableOpacity>
         <View style={styles.welcomeContainer}>
           <Image
             source={
@@ -93,6 +121,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    padding: 2,
+    borderRadius: 2,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -175,5 +205,25 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7',
+  },
+  button: {
+    flex: 1,
+    fontSize: 18,
+    margin: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#5DADE2",
+    color: 'white',
+    fontWeight: 'normal',
+    padding: 10,
+  },
+  buttonText: {
+    flex: 1,
+    fontSize: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#5DADE2",
+    color: 'white',
+    fontWeight: 'normal',
   },
 });

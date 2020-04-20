@@ -9,7 +9,23 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 
+import HomeScreen from'./screens/HomeScreen.js'
+import MapScreen from './screens/mapScreen.js'
+import MapSettingsScreen from './screens/mapSettingsScreen.js'
+import DataSettingsScreen from './screens/dataScreen.js'
+
 const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home"           component={HomeScreen} />
+      <Stack.Screen name="Map"            component={MapScreen} />
+      <Stack.Screen name="MapSettings"    component={MapSettingsScreen} />
+      <Stack.Screen name="DataSettings"   component={dataSettingsScreen} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -51,7 +67,13 @@ export default function App(props) {
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
           <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
+            <Stack.Screen name="Root"         component={BottomTabNavigator} />
+            <Stack.Screen name="Home"         component={HomeScreen} />
+            <Stack.Screen name="Map"          component={MapScreen} />
+            <Stack.Screen name="MapSettings"  component={MapSettingsScreen} />
+            <Stack.Screen name="DataSettings" component={DataSettingsScreen} />
+
+
           </Stack.Navigator>
         </NavigationContainer>
       </View>
