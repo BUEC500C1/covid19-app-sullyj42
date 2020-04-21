@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 22262,
-  "expoServerNgrokUrl": "https://ug-np2.anonymous.covid.exp.direct",
-  "packagerNgrokUrl": "https://packager.ug-np2.anonymous.covid.exp.direct",
-  "ngrokPid": 22273,
+  "packagerPid": 1066,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

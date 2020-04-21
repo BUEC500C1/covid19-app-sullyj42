@@ -52,7 +52,7 @@ const SearchScreen = () => {
                     results={filterResultsByPrice(100, 1000)}
                 />
                 <ResultsList
-                    title="The rest (less than 1,000,000,000"
+                    title="The rest"
                     results={filterResultsByPrice(1000, Infinity)}
                 />
             </ScrollView>

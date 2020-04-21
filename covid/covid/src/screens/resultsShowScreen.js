@@ -1,14 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 import jhcovid from '../api/jhcovid'
+const abbData = require('../../country-json/src/country-by-abbreviation.json');
 const popData = require('../../country-json/src/country-by-population.json');
-
+const denData = require('../../country-json/src/country-by-population-density.json');
+const IMAGE_SIZE = 64
+function parseJSON(inputData, fieldName, resultData) {
+    let countryData = 0
+    try {
+        temp = inputData.filter( (obj) => {
+            return ((obj.country === resultData))
+        })
+        // console.log(temp)
+        countryData = temp[0][fieldName]
+    } catch(error) {
+        countryData = 'N/A'
+    }
+    return countryData
+}
 
 const ResultsShowScreen = ( { navigation } ) => {
     // const [result, setResult] = useState(null); // Expect a single object (from yelp)
     const id = navigation.getParam('id');
     const result = navigation.getParam('result');
 
+    const abb = parseJSON(abbData, 'abbreviation', result.Country)
+    console.log('abbreviation')
+    console.log(abb)
+    const countryPopulation = parseJSON(popData, 'population',  result.Country)
+    const countryPopDensity = parseJSON(denData, 'density',     result.Country)
+    const urlString = `https://www.countryflags.io/${abb}/shiny/${IMAGE_SIZE}.png`
+    console.log(urlString)
     // const getResult = async (id) => {
     //     const response = await jhcovid.get('/summary') //(`/${id}`)
     //     setResult(response.data);
@@ -26,18 +48,33 @@ const ResultsShowScreen = ( { navigation } ) => {
     // console.log(result)
     return (
         <View style={{flex: 1}}>
-            <Text style={styles.text}>Test: {result.Country}</Text>
+            <Text style={styles.text}>
+                Test: {result.Country}{"\n"}
+                New confirmed: {result.NewConfirmed}{"\n"}
+                Total Confirmed: {result.TotalConfirmed}{"\n"}
+                New Deaths: {result.NewDeaths}{"\n"}
+                Total Deaths: {result.TotalDeaths}{"\n"}
+                New Recovered: {result.NewRecovered}{"\n"}
+                Total Recovered: {result.TotalRecovered}{"\n"}
+                Total Population: {countryPopulation}{"\n"}
+                Population Density: {countryPopDensity}{"\n"}
+                Date: {result.Date}
+            </Text>
+            <Image 
+                style={styles.image}
+                source={{ uri: urlString}} 
+            />
             {/*
-            // <FlatList
-            //     data={result.Country}
-            //     keyExtractor={(Country) => Country}
-            //     // renderItem={({ item }) => {
-            //     //     return <Image 
-            //     //         style={styles.image}
-            //     //         source={{ uri: item}} 
-            //     //     />
-            //     // }}
-            // />
+            <FlatList
+                data={result.Country}
+                keyExtractor={(Country) => result.Country}
+                renderItem={({ item }) => {
+                    return <Image 
+                        style={styles.image}
+                        // source={{ uri: urlString}} 
+                    />
+                }}
+            />
             */}
         </View>
     );
@@ -45,8 +82,8 @@ const ResultsShowScreen = ( { navigation } ) => {
 
 const styles = StyleSheet.create({
     image: {
-        height: 200, 
-        width: 200,
+        height: IMAGE_SIZE*2, 
+        width: IMAGE_SIZE*2,
         padding:20,
         margin:10,
         borderRadius: 8,

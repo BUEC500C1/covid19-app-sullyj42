@@ -1,22 +1,7 @@
 import { useState, useEffect } from "react";
 import jhcovid from '../api/jhcovid'
 
-// GET By Country All Status
-// https://api.covid19api.com/country/south-africa?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z
-// Returns all cases by case type for a country. Country must be the slug from /countries or /summary. Cases must be one of: confirmed, recovered, deaths
 
-// PARAMS
-// from2020-03-01T00:00:00Z
-// to2020-04-01T00:00:00Z
-
-// https://api.covid19api.com/countries
-// -- Returns a list of availble countries
-// -- -- May be useful if returned data does not have lat/lon
-// {
-//     "Country": "Barbados",
-//   "Slug": "barbados",
-//   "ISO2": "BB"
-// },
 export default () => {
     const [term, setTerm] = useState('');
     const [results, setResults] = useState([]);

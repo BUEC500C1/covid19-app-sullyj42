@@ -9,36 +9,52 @@ const denData = require('../../country-json/src/country-by-population-density.js
 // console.log('end pop-data')
 
 
+function parseJSON(inputData, fieldName, resultData) {
+    let countryData = 0
+    try {
+        temp = inputData.filter( (obj) => {
+            return ((obj.country === resultData))
+        })
+        // console.log(temp)
+        countryData = temp[0][fieldName]
+    } catch(error) {
+        countryData = 'N/A'
+    }
+    return countryData
+}
+
 const ResultsDetail = ({ result }) => {
 
     // Super shitty code to extract values from json file
     // console.log('population')
     // console.log(result.Country)
-    let countryPopulation = 0
-    let countryPopDensity = 0
+    const countryPopulation = parseJSON(popData, 'population',  result.Country)
+    const countryPopDensity = parseJSON(denData, 'density',     result.Country)
 
-    let temp = []
-    try {
-        temp = popData.filter( (obj) => {
-            return ((obj.country === result.Country))
-        })
-        console.log(temp)
-        countryPopulation = temp[0].population
-    } catch(error) {
-        countryPopulation = 'N/A'
-    }
+    // let countryPopDensity = 0
+
+    // let temp = []
+    // try {
+    //     temp = popData.filter( (obj) => {
+    //         return ((obj.country === result.Country))
+    //     })
+    //     console.log(temp)
+    //     countryPopulation = temp[0].population
+    // } catch(error) {
+    //     countryPopulation = 'N/A'
+    // }
 
     // console.log(countryPopulation)
-    try {
-        temp = denData.filter( (obj) => {
-            return ((obj.country === result.Country))
-        })
-        console.log(temp)
-        countryPopDensity = temp[0].density
-    } catch(error) {
-        countryPopDensity = 'N/A'
-        // console.log(error);
-    }
+    // try {
+    //     temp = denData.filter( (obj) => {
+    //         return ((obj.country === result.Country))
+    //     })
+    //     console.log(temp)
+    //     countryPopDensity = temp[0].density
+    // } catch(error) {
+    //     countryPopDensity = 'N/A'
+    //     // console.log(error);
+    // }
     // denData.filter( (obj) => {
     //     return (obj.country === result.Country[0].density)
     // })[0].density;
