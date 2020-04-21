@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import FlashMessage from "react-native-flash-message";
 import jhcovid from '../api/jhcovid'
+import SearchBar from "../components/searchBar";
+import { Root, Popup } from 'popup-ui'
+
+
+
+
 const abbData = require('../../country-json/src/country-by-abbreviation.json');
 const popData = require('../../country-json/src/country-by-population.json');
 const denData = require('../../country-json/src/country-by-population-density.json');
+
 const IMAGE_SIZE = 64
+
 function parseJSON(inputData, fieldName, resultData) {
     let countryData = 0
     try {
@@ -18,12 +27,43 @@ function parseJSON(inputData, fieldName, resultData) {
     }
     return countryData
 }
-
+function doAdelay(){
+    setTimeout(function(){return true;},5000);
+};
 const ResultsShowScreen = ( { navigation } ) => {
     // const [result, setResult] = useState(null); // Expect a single object (from yelp)
     const id = navigation.getParam('id');
     const result = navigation.getParam('result');
+    if (!result) {
+        console.log('Error: Passed empty result')
+        {navigation.navigate('Search')}   
 
+        return (
+            <Root>
+                <View>
+                    <TouchableOpacity
+                        onPress={() =>
+                            Popup.show({
+                                type: 'Success',
+                                title: 'Upload complete',
+                                button: false,
+                                textBody: 'Congrats! Your upload successfully done',
+                                buttontext: 'Ok',
+                                callback: () => Popup.hide()
+                            })
+                        }
+                    >
+            <Text>Open Popup</Text>
+        </TouchableOpacity>
+    </View>
+</Root>
+        // return (
+        //  <View style={{ flex: 1 }}>
+        //    {/* GLOBAL FLASH MESSAGE COMPONENT INSTANCE */}
+        //    <FlashMessage position="top" animated={true} />
+        //  </View>
+        );
+    }
     const abb = parseJSON(abbData, 'abbreviation', result.Country)
     console.log('abbreviation')
     console.log(abb)

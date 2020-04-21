@@ -5,7 +5,9 @@ import jhcovid from "../api/jhcovid";
 import useResults from "../hooks/useResults";
 import ResultsList from "../components/resultList";
 
-const SearchScreen = () => {
+
+
+const SearchScreen = ( {navigation} ) => {
     // console.log(props)
     const [term, setTerm] = useState("");
     [searchApi, results, errorMessage] = useResults();
@@ -17,6 +19,25 @@ const SearchScreen = () => {
             return (result.NewConfirmed < threshholdmax && result.NewConfirmed >= threshholdmin);
         });
     };
+    const filterResultByCountry = ( countryVal ) => {
+        return results.filter((result) =>  {
+            return result.Country === countryVal; // Will this return null otherwise, or crash
+        })[0];
+    }
+
+    let myCallback = (term) => {
+        let resultByCountry = filterResultByCountry(term)
+        if (resultByCountry) {
+            navigation.navigate('ResultsShow', {id: null, result: filterResultByCountry(term)})
+        } else {
+            console.log('Add warning message')
+        }
+    }
+
+    // console.log(results[10])
+    // const test = filterResultByCountry('Argentina');
+    // console.log(test)
+    // console.log('^^Filter to Argentina^^')
     // const filterResultsNoPrice = () => {
     //     // price === '$' || '$$' || '$$$'
     //     return results.filter(result => {
@@ -30,7 +51,8 @@ const SearchScreen = () => {
             <SearchBar
                 term={term}
                 onTermChange={setTerm}
-                onTermSubmit={() => searchApi()} // Rework this later...
+                onTermSubmit={() => (myCallback(term))}
+                placehold='Enter a valid country (ie Chad)'
             />
             {/*<Text>You have entered: {term}</Text>*/}
             {/*

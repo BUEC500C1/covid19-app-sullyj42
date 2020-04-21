@@ -21,7 +21,15 @@ const ResultsList = ({ title, results, navigation }) => {
                 keyExtractor={(result) => result.Country}
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity 
+                        <TouchableOpacity
+                            style={{
+                                borderRightWidth: 1, 
+                                borderRightColor: 'gray', 
+                                padding:5, 
+                                borderTopRightRadius: 10,
+                                borderBottomRightRadius: 10,
+
+                            }}
                             onPress={() => navigation.navigate('ResultsShow', {id: item.id, result: item})}
                         >
                         <ResultsDetail
