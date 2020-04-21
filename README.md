@@ -1,4 +1,9 @@
 # covid19-app-sullyj42
+
+# Application Demo
+-- https://youtu.be/9BPFAY0EvhM
+
+# Summary
 This repository contains Flask files for Assignment 7 of EC500, Boston University, Spring 2020
 
 Initially, this will mostly contain the folder for the Udemy course detailing the basics of 
@@ -46,3 +51,20 @@ After spending two hours working with the API, I have decided to just work with 
 I will try to display a flat-list with country information for countries with new cases
 
 I will then list countries with no new information in a seperate list
+
+# Update 4/21/20
+
+Pulling information from various JSON files, was able to hobble together a decent app.
+
+Plenty of things that could be improved upon
+-- Provide multiple possible country names to match to
+-- See "United States of America" debacle in the video
+-- -- Also note, US does not show up in the Map
+
+-- Impliment filters for the Map screen (currently a huge amount of data on the screen)
+
+-- Actually use the data-filter on the map screen
+
+-- Allow data normalization by certain fields (population density, etc) to tease out correlations
+
+And so on
