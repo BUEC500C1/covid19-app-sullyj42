@@ -28,7 +28,6 @@ const ResultsList = ({ title, results, navigation }) => {
                                 padding:5, 
                                 borderTopRightRadius: 10,
                                 borderBottomRightRadius: 10,
-
                             }}
                             onPress={() => navigation.navigate('ResultsShow', {id: item.id, result: item})}
                         >

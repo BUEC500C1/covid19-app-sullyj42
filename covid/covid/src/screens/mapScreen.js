@@ -13,6 +13,10 @@ import {
 // import { PROVIDER_GOOGLE, PROVIDER_DEFAULT, MapView } from "react-native-maps";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps"; // remove PROVIDER_GOOGLE import if not using Google Maps
 import DatePicker from "react-native-date-ranges";
+import { withNavigation } from 'react-navigation';
+import useResults from "../hooks/useResults"; // Should do this in a better way
+import SearchBar from "../components/searchBar";
+
 
 const IMAGE_SIZE = 64
 const geoData = require('../../country-json/src/country-by-geo-coordinates.json');
@@ -29,9 +33,18 @@ function parseCoords(inputData, resultData) {
           latitude: (parseFloat(temp[0]['north']) + parseFloat(temp[0]['south']))/2,
           longitude: (parseFloat(temp[0]['west']) + parseFloat(temp[0]['east']))/2
         }
-        console.log(coords)
+        // console.log(coords)
     } catch(error) {
-        coords = null
+        coords = {
+          latitude: -89,
+          longitude: 89 
+        }
+    }
+    if (isNaN(coords.latitude) | isNaN(coords.longitude)) {
+        coords = {
+          latitude: -89,
+          longitude: 89 
+        }
     }
     return coords
 }
@@ -64,7 +77,7 @@ const myButton = (onConfirm) => {
     </View>
   );
 };
-console.log(parseCoords(geoData, 'United States'))
+// console.log(parseCoords(geoData, 'United States'))
 var markers = [
   {
     coordinate: parseCoords(geoData, 'United States'),
@@ -80,7 +93,10 @@ var markers = [
   }
 ]
 
-const MapScreen = () => {
+const MapScreen = ({ navigation }) => {
+  const [term, setTerm] = useState("");
+  [searchApi, results, errorMessage] = useResults();
+
   return (
     <View style={{}}>
       <View style={styles.mapContainer}>
@@ -94,17 +110,19 @@ const MapScreen = () => {
             longitudeDelta: 180,
           }}
         >
-        {markers[0] != null && markers.map((marker, index) => (
+        {console.log(results[0])}
+        {results[0] != null  && results.map((result, index) => (
               <Marker
                   key = {index}
-                  coordinate = {marker.coordinate}
-                  title = { marker.title }
-                  description={marker.subtitle}
+                  coordinate = {parseCoords(geoData, result.Country)}
+                  title = { result.Country }
+                  description={`New Confirmed: ${result.NewConfirmed}`}
                   anchor={{ x: 0.5, y: 0.5 }}
+                  onCalloutPress={() => (navigation.navigate('ResultsShow', {id: result.Country, result: result}))}
               >
               <Image
                 style={styles.image}
-                source={{ uri: `https://www.countryflags.io/${marker.abb}/shiny/${IMAGE_SIZE}.png`}} 
+                source={{ uri: `https://www.countryflags.io/${result.CountryCode}/shiny/${IMAGE_SIZE}.png`}} 
               />
               </Marker>
           ))

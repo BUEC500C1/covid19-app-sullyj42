@@ -31,44 +31,6 @@ const ResultsDetail = ({ result }) => {
     const countryPopulation = parseJSON(popData, 'population',  result.Country)
     const countryPopDensity = parseJSON(denData, 'density',     result.Country)
 
-    // let countryPopDensity = 0
-
-    // let temp = []
-    // try {
-    //     temp = popData.filter( (obj) => {
-    //         return ((obj.country === result.Country))
-    //     })
-    //     console.log(temp)
-    //     countryPopulation = temp[0].population
-    // } catch(error) {
-    //     countryPopulation = 'N/A'
-    // }
-
-    // console.log(countryPopulation)
-    // try {
-    //     temp = denData.filter( (obj) => {
-    //         return ((obj.country === result.Country))
-    //     })
-    //     console.log(temp)
-    //     countryPopDensity = temp[0].density
-    // } catch(error) {
-    //     countryPopDensity = 'N/A'
-    //     // console.log(error);
-    // }
-    // denData.filter( (obj) => {
-    //     return (obj.country === result.Country[0].density)
-    // })[0].density;
-    // console.log('Density')
-    // console.log(countryPopDensity)
-
-    //console.log(result)
-    // const countryPopulation = ''
-    // const countryPopDensity = ''
-
-    // const countryPopulation = popData[result.country]
-    // const countryPopDensity = denData[result.country]
-
-    // console.log(countryPopulation)
     return (
         <View style={styles.container}>
             {/*
