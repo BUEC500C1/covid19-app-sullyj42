@@ -15,6 +15,26 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps"; // remove 
 import DatePicker from "react-native-date-ranges";
 
 const IMAGE_SIZE = 64
+const geoData = require('../../country-json/src/country-by-geo-coordinates.json');
+
+function parseCoords(inputData, resultData) {
+    let coords = 0
+    try {
+        temp = inputData.filter( (obj) => {
+            return ((obj.country === resultData))
+        })
+        // console.log(temp)
+        console.log(temp)
+        coords = {
+          latitude: (parseFloat(temp[0]['north']) + parseFloat(temp[0]['south']))/2,
+          longitude: (parseFloat(temp[0]['west']) + parseFloat(temp[0]['east']))/2
+        }
+        console.log(coords)
+    } catch(error) {
+        coords = null
+    }
+    return coords
+}
 
 
 const styles = StyleSheet.create({
@@ -44,22 +64,16 @@ const myButton = (onConfirm) => {
     </View>
   );
 };
-
+console.log(parseCoords(geoData, 'United States'))
 var markers = [
   {
-    coordinate: {
-      latitude: 37.0902,
-      longitude: -95.7129
-    },
+    coordinate: parseCoords(geoData, 'United States'),
     title: "United States",
     subtitle: "Subtitle data",
     abb: "US",
   }, 
   {
-    coordinate: {
-      latitude: 60.0902,
-      longitude: -95.7129
-    },
+    coordinate:  parseCoords(geoData, 'Canada'),
     title: "Canada",
     subtitle: "Subtitle data",
     abb: "CA",
