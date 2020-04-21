@@ -1,35 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
-import yelp from '../api/yelp'
-const ResultsShowScreen = ( { navigation } ) => {
-    const [result, setResult] = useState(null); // Expect a single object
-    const id = navigation.getParam('id');
-    const getResult = async (id) => {
-        const response = await yelp.get(`/${id}`)
-        setResult(response.data);
-    }
-    console.log(result);
+import jhcovid from '../api/jhcovid'
+const popData = require('../../country-json/src/country-by-population.json');
 
-    useEffect(() => {
-        getResult(id);
-    }, []);
+
+const ResultsShowScreen = ( { navigation } ) => {
+    // const [result, setResult] = useState(null); // Expect a single object (from yelp)
+    const id = navigation.getParam('id');
+    const result = navigation.getParam('result');
+
+    // const getResult = async (id) => {
+    //     const response = await jhcovid.get('/summary') //(`/${id}`)
+    //     setResult(response.data);
+    // }
+    // console.log(result);
+
+    // useEffect(() => {
+    //     getResult(id);
+    // }, []);
 
     if (!result) { // If result was not assigned, punt
+        console.log('Result empty')
         return null;
     }
+    // console.log(result)
     return (
         <View style={{flex: 1}}>
-            <Text style={styles.text}>{result.name}</Text>
-            <FlatList
-                data={result.photos}
-                keyExtractor={(photo) => photo}
-                renderItem={({ item }) => {
-                    return <Image 
-                        style={styles.image}
-                        source={{ uri: item}} 
-                    />
-                }}
-            />
+            <Text style={styles.text}>Test: {result.Country}</Text>
+            {/*
+            // <FlatList
+            //     data={result.Country}
+            //     keyExtractor={(Country) => Country}
+            //     // renderItem={({ item }) => {
+            //     //     return <Image 
+            //     //         style={styles.image}
+            //     //         source={{ uri: item}} 
+            //     //     />
+            //     // }}
+            // />
+            */}
         </View>
     );
 };

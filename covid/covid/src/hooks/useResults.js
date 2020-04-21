@@ -22,17 +22,18 @@ export default () => {
     const [results, setResults] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const searchApi = async (searchTerm) => { // async --> await
+    const searchApi = async () => { // async --> await
         setErrorMessage('No errors')
         try {
-            const response = await yelp.get('/search', {
-                params: {
-                    limit: 50,
-                    term: searchTerm, // Equivalent to term: term (key, value identical)
-                    location: 'san jose'
-                }
-            });
-            setResults(response.data.businesses) // json object we want to store
+            const response = await jhcovid.get('/summary')//, {
+                // params: {
+                //     // limit: 50,
+                //     // term: searchTerm, // Equivalent to term: term (key, value identical)
+                //     // location: 'san jose'
+                // }
+                // });
+            // console.log(response.data.Countries)
+            setResults(response.data.Countries) // json object we want to store
         } catch (err) {
             console.log('')
             console.log(err)
@@ -44,7 +45,7 @@ export default () => {
     // BAD CODE
     // searchApi('pasta');
     useEffect(() => {
-        searchApi('pasta')
+        searchApi()
     }, [])
     return [searchApi, results, errorMessage];
 };

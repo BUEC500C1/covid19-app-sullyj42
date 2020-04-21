@@ -9,6 +9,7 @@ Once that is done, I will refactor into the proper branches (Map, PostMan Covid)
 
 ---
 Update: April 20, 2020
+# Maps
 
 Implimented a simple maps utility.
 
@@ -22,9 +23,9 @@ Screens:
 -- -- Not yet implimented (beginning to explore this in the next step, in seperate repo)
 
 ---
-Update: April 20, 2020
+# COVID
 
-COVID API will need some wrapping to be useful
+COVID API will need some wrapping to be useful for displaying country, date
 
 Should probably associate countries with current region of interest from map
 
@@ -39,3 +40,9 @@ If we want data from a range of dates, need to sum the values for display
 - 3. a. Ignore time varying population for now
 - 3. b. Future development could add this feature
 
+-- 
+After spending two hours working with the API, I have decided to just work with the "summary" call for now.
+
+I will try to display a flat-list with country information for countries with new cases
+
+I will then list countries with no new information in a seperate list

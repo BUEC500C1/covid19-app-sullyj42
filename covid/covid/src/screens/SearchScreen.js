@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import SearchBar from "../components/searchBar";
-import yelp from "../api/yelp";
+import jhcovid from "../api/jhcovid";
 import useResults from "../hooks/useResults";
 import ResultsList from "../components/resultList";
 
@@ -10,10 +10,11 @@ const SearchScreen = () => {
     const [term, setTerm] = useState("");
     [searchApi, results, errorMessage] = useResults();
 
-    const filterResultsByPrice = (price) => {
+    const filterResultsByPrice = (threshholdmin, threshholdmax) => {
         // price === '$' || '$$' || '$$$'
         return results.filter((result) => {
-            return result.price === price;
+            // console.log(result.NewConfirmed)
+            return (result.NewConfirmed < threshholdmax && result.NewConfirmed >= threshholdmin);
         });
     };
     // const filterResultsNoPrice = () => {
@@ -29,7 +30,7 @@ const SearchScreen = () => {
             <SearchBar
                 term={term}
                 onTermChange={setTerm}
-                onTermSubmit={() => searchApi(term)}
+                onTermSubmit={() => searchApi()} // Rework this later...
             />
             {/*<Text>You have entered: {term}</Text>*/}
             {/*
@@ -39,20 +40,20 @@ const SearchScreen = () => {
             {/*Need grouping logic to parse search results by price proprety*/}
             <ScrollView>
                 <ResultsList
-                    title="Cost Effective ($)"
-                    results={filterResultsByPrice("$")}
+                    title="Nothing new"
+                    results={filterResultsByPrice(0, 1)}
                 />
                 <ResultsList
-                    title="Bit Pricier ($$)"
-                    results={filterResultsByPrice("$$")}
+                    title="Less than 100"
+                    results={filterResultsByPrice(1, 100)}
                 />
                 <ResultsList
-                    title="Big Spender ($$$)"
-                    results={filterResultsByPrice("$$$")}
+                    title="Less than 1000"
+                    results={filterResultsByPrice(100, 1000)}
                 />
                 <ResultsList
-                    title="Yuge Spender ($$$$)"
-                    results={filterResultsByPrice("$$$$")}
+                    title="The rest (less than 1,000,000,000"
+                    results={filterResultsByPrice(1000, Infinity)}
                 />
             </ScrollView>
             {/*
