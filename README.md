@@ -1,7 +1,7 @@
 # covid19-app-sullyj42
 
 # Application Demo
--- https://youtu.be/9BPFAY0EvhM
+-- https://youtube.com/watch?v=9BPFAY0EvhM&t=0m42s
 
 # Summary
 This repository contains Flask files for Assignment 7 of EC500, Boston University, Spring 2020
