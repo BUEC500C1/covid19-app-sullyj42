@@ -4,13 +4,7 @@
 -- https://youtube.com/watch?v=9BPFAY0EvhM&t=0m42s
 
 # Summary
-This repository contains Flask files for Assignment 7 of EC500, Boston University, Spring 2020
-
-Initially, this will mostly contain the folder for the Udemy course detailing the basics of 
-
-Once that course is partially completed, I will add new folders to detail the assignment completion
-
-Once that is done, I will refactor into the proper branches (Map, PostMan Covid)
+This repository contains React-Native files for Assignment 7 of EC500, Boston University, Spring 2020
 
 ---
 Update: April 20, 2020
@@ -30,27 +24,24 @@ Screens:
 ---
 # COVID
 
-COVID API will need some wrapping to be useful for displaying country, date
+Application was developed during the 2020 COVID-19 Pandemic. As such, Covid provided an interesting use-case, with significant data available. 
 
-Should probably associate countries with current region of interest from map
+## Data resources
+Covid data was obtained through the (XX) API, which in turn wraps around the John Hopkins AWS resource. 
 
-Then iterate over country and date to get data for that country
+Map data was obtained through react-native-maps, calling Google Maps under the hood
 
-If we want data from a range of dates, need to sum the values for display
+Flag data was obtained from the web resource (XX)
 
-- This will require us to create a new .json file to associate countries with...
-- 1. Their physical location (if inside the map)
-- 2. Some sort of ID (Country code?)
-- 3. Population will be useful for per-capita estimates
-- 3. a. Ignore time varying population for now
-- 3. b. Future development could add this feature
+Country population and population density was scaled by 
 
--- 
-After spending two hours working with the API, I have decided to just work with the "summary" call for now.
+## Known bugs
+There are a number of different JSON files referenced which could (should) be combined.
 
-I will try to display a flat-list with country information for countries with new cases
+- Currently using as the key-parameter for most lookups, which does not always take (See United States in Video)
+- The XX API provides country-names, which are somewhat ambigious. 
+-- There is a request to return country-name / abbreviation pairings, this dictionary should be implimented
 
-I will then list countries with no new information in a seperate list
 
 # Update 4/21/20
 
